@@ -4,9 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  // invite flow → /auth/set-password  |  reset flow → /auth/update-password
+  const next = searchParams.get("next") ?? "/auth/set-password";
 
   if (code) {
-    const response = NextResponse.redirect(`${origin}/auth/set-password`);
+    const response = NextResponse.redirect(`${origin}${next}`);
 
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -27,5 +29,5 @@ export async function GET(request: NextRequest) {
     if (!error) return response;
   }
 
-  return NextResponse.redirect(`${origin}/?error=invite`);
+  return NextResponse.redirect(`${origin}/?error=auth`);
 }
