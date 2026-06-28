@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-6">
+      <Image src="/logo.png" alt="בינה בלב" width={120} height={120} className="object-contain" priority />
       <h1 className="text-4xl font-bold text-blue-800 tracking-tight">בינה בלב</h1>
       <div className="flex gap-4 mt-2">
         <Link

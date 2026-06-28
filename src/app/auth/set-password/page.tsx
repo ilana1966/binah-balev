@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
@@ -40,12 +41,7 @@ export default function SetPasswordPage() {
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-2xl px-8 py-10">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg mb-4">
-              <svg viewBox="0 0 40 40" className="w-9 h-9 fill-white">
-                <circle cx="20" cy="14" r="7" />
-                <path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14H6z" />
-              </svg>
-            </div>
+            <Image src="/logo.png" alt="בינה בלב" width={90} height={90} className="object-contain mb-3" priority />
             <h1 className="text-2xl font-bold text-blue-800 tracking-tight">הגדרת סיסמה</h1>
             <p className="text-sm text-gray-400 mt-1">בחרי סיסמה לחשבונך</p>
           </div>

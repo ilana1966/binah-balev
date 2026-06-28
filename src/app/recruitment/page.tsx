@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Candidate, StatusKey, STATUS_CONFIG, FILTERS } from "./types";
 import CandidateDrawer from "./CandidateDrawer";
+import Navbar from "@/components/Navbar";
 
 const availabilityLabel = (v: string) => (v === "full" ? "מלאה" : "חלקית");
 
@@ -41,6 +42,7 @@ export default function RecruitmentPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-8 py-5">
         <div className="flex items-center justify-between">

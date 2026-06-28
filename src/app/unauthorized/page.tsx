@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function UnauthorizedPage() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4" dir="rtl">
+    <div className="min-h-screen bg-gray-50" dir="rtl">
+      <Navbar />
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-3.5rem)]">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-12 text-center max-w-md w-full">
         <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -17,6 +22,7 @@ export default function UnauthorizedPage() {
         <Link href="/dashboard" className="text-sm text-blue-600 hover:text-blue-800 transition">
           חזרה לדשבורד
         </Link>
+      </div>
       </div>
     </div>
   );

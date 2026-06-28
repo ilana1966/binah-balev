@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Navbar from "@/components/Navbar";
 
 export default function AdminUsersPage() {
   const [email, setEmail] = useState("");
@@ -28,8 +29,9 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-xl mx-auto">
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <div className="p-8 max-w-xl mx-auto">
         <h1 className="text-2xl font-bold text-blue-800 mb-2">ניהול משתמשים</h1>
         <p className="text-sm text-gray-500 mb-8">הוספת משתמש חדש תשלח לו מייל להגדרת סיסמה</p>
 
@@ -72,3 +74,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+

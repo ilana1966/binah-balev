@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
@@ -177,12 +178,7 @@ export default function ApplyPage() {
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-md mb-4">
-            <svg viewBox="0 0 40 40" className="w-8 h-8 fill-white">
-              <circle cx="20" cy="14" r="7" />
-              <path d="M6 34c0-7.732 6.268-14 14-14s14 6.268 14 14H6z" />
-            </svg>
-          </div>
+          <Image src="/logo.png" alt="בינה בלב" width={90} height={90} className="object-contain mb-2" priority />
           <h1 className="text-2xl font-bold text-blue-800">הגשת מועמדות</h1>
           <p className="text-sm text-gray-400 mt-1">בינה בלב</p>
         </div>
