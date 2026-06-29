@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 const NAV_ITEMS = [
+  { href: "/",          label: "דף הבית" },
   { href: "/dashboard", label: "HR / גיוס" },
   { href: "/projects",  label: "פרויקטים" },
   { href: "/training",  label: "הדרכות" },
