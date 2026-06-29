@@ -4,8 +4,10 @@ export type Candidate = {
   last_name: string;
   email: string;
   phone: string | null;
-  degree_field: string;
-  institution: string;
+  degree_field_id: number;
+  institution_id: number;
+  degree_fields: { name: string };
+  institutions: { name: string };
   availability: string;
   ai_experience: string | null;
   volunteering: boolean;

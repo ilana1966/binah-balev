@@ -18,7 +18,7 @@ export default function RecruitmentPage() {
     const fetchCandidates = async () => {
       const { data, error } = await supabase
         .from("candidates")
-        .select("*")
+        .select("*, degree_fields(name), institutions(name)")
         .order("created_at", { ascending: false });
       if (!error && data) setCandidates(data);
       setLoading(false);
@@ -111,8 +111,8 @@ export default function RecruitmentPage() {
                       </td>
                       <td className="px-4 py-3 text-gray-500" dir="ltr">{c.email}</td>
                       <td className="px-4 py-3 text-gray-500" dir="ltr">{c.phone ?? "—"}</td>
-                      <td className="px-4 py-3 text-gray-600">{c.degree_field}</td>
-                      <td className="px-4 py-3 text-gray-600">{c.institution}</td>
+                      <td className="px-4 py-3 text-gray-600">{c.degree_fields.name}</td>
+                      <td className="px-4 py-3 text-gray-600">{c.institutions.name}</td>
                       <td className="px-4 py-3 text-gray-600">{availabilityLabel(c.availability)}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${statusCfg.badge}`}>

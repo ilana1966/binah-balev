@@ -1,39 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
-const DEGREE_FIELDS = [
-  "מדעי המחשב",
-  "מערכות מידע",
-  "מדעי הנתונים",
-  "הנדסת תוכנה",
-  "הנדסת מחשבים",
-  "אחר",
-];
-
-const INSTITUTIONS = [
-  "אוניברסיטת תל אביב",
-  "האוניברסיטה העברית בירושלים",
-  "הטכניון",
-  "אוניברסיטת בן גוריון בנגב",
-  "אוניברסיטת בר אילן",
-  "אוניברסיטת חיפה",
-  "מכללת רייכמן",
-  "המכללה האקדמית תל אביב יפו",
-  "הקריה האקדמית אונו",
-  "אחר",
-];
+type LookupItem = { id: number; name: string };
 
 type FormState = {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  degreeField: string;
-  institution: string;
+  degreeFieldId: string;
+  institutionId: string;
   workScope: string;
   aiExperience: string;
   volunteeredBefore: string;
@@ -60,16 +40,30 @@ export default function ApplyPage() {
     lastName: "",
     email: "",
     phone: "",
-    degreeField: "",
-    institution: "",
+    degreeFieldId: "",
+    institutionId: "",
     workScope: "",
     aiExperience: "",
     volunteeredBefore: "",
     cv: null,
     transcript: null,
   });
+  const [degreeFields, setDegreeFields] = useState<LookupItem[]>([]);
+  const [institutions, setInstitutions] = useState<LookupItem[]>([]);
+  const [lookupsLoading, setLookupsLoading] = useState(true);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    Promise.all([
+      supabase.from("degree_fields").select("id, name").order("name"),
+      supabase.from("institutions").select("id, name").order("name"),
+    ]).then(([df, inst]) => {
+      if (df.data) setDegreeFields(df.data);
+      if (inst.data) setInstitutions(inst.data);
+      setLookupsLoading(false);
+    });
+  }, []);
 
   const set =
     (field: keyof FormState) =>
@@ -109,8 +103,8 @@ export default function ApplyPage() {
         last_name: form.lastName,
         email: form.email,
         phone: form.phone || null,
-        degree_field: form.degreeField,
-        institution: form.institution,
+        degree_field_id: parseInt(form.degreeFieldId),
+        institution_id: parseInt(form.institutionId),
         availability: form.workScope,
         ai_experience: form.aiExperience || null,
         volunteering: form.volunteeredBefore === "yes",
@@ -212,16 +206,16 @@ export default function ApplyPage() {
           <Section title="פרטים אקדמיים">
             <div>
               <label className={labelClass}>תחום תואר</label>
-              <select value={form.degreeField} onChange={set("degreeField")} required className={`${inputClass} bg-white`}>
-                <option value="" disabled>בחר תחום...</option>
-                {DEGREE_FIELDS.map((f) => <option key={f} value={f}>{f}</option>)}
+              <select value={form.degreeFieldId} onChange={set("degreeFieldId")} required disabled={lookupsLoading} className={`${inputClass} bg-white`}>
+                <option value="" disabled>{lookupsLoading ? "טוען..." : "בחר תחום..."}</option>
+                {degreeFields.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
               </select>
             </div>
             <div>
               <label className={labelClass}>מוסד לימודים</label>
-              <select value={form.institution} onChange={set("institution")} required className={`${inputClass} bg-white`}>
-                <option value="" disabled>בחר מוסד...</option>
-                {INSTITUTIONS.map((i) => <option key={i} value={i}>{i}</option>)}
+              <select value={form.institutionId} onChange={set("institutionId")} required disabled={lookupsLoading} className={`${inputClass} bg-white`}>
+                <option value="" disabled>{lookupsLoading ? "טוען..." : "בחר מוסד..."}</option>
+                {institutions.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}
               </select>
             </div>
           </Section>

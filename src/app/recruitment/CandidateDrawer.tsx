@@ -60,8 +60,8 @@ export default function CandidateDrawer({ candidate, onClose, onStatusChange }: 
           </Section>
 
           <Section title="פרטים אקדמיים">
-            <Row label="תחום תואר" value={candidate.degree_field} />
-            <Row label="מוסד לימודים" value={candidate.institution} />
+            <Row label="תחום תואר" value={candidate.degree_fields.name} />
+            <Row label="מוסד לימודים" value={candidate.institutions.name} />
           </Section>
 
           <Section title="זמינות וניסיון">

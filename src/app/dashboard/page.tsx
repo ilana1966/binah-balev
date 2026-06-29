@@ -11,8 +11,10 @@ type Candidate = {
   last_name: string;
   email: string;
   phone: string | null;
-  degree_field: string;
-  institution: string;
+  degree_field_id: number;
+  institution_id: number;
+  degree_fields: { name: string };
+  institutions: { name: string };
   availability: string;
   ai_experience: string | null;
   volunteering: boolean;
@@ -50,7 +52,7 @@ export default function DashboardPage() {
   useEffect(() => {
     supabase
       .from("candidates")
-      .select("*")
+      .select("*, degree_fields(name), institutions(name)")
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (data) setCandidates(data);
@@ -180,8 +182,8 @@ export default function DashboardPage() {
                     <tr key={c.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors last:border-0">
                       <td className="px-4 py-3 font-medium text-gray-800">{c.first_name} {c.last_name}</td>
                       <td className="px-4 py-3 text-gray-500 text-xs" dir="ltr">{c.email}</td>
-                      <td className="px-4 py-3 text-gray-600">{c.degree_field}</td>
-                      <td className="px-4 py-3 text-gray-600 text-xs">{c.institution}</td>
+                      <td className="px-4 py-3 text-gray-600">{c.degree_fields.name}</td>
+                      <td className="px-4 py-3 text-gray-600 text-xs">{c.institutions.name}</td>
                       <td className="px-4 py-3 text-gray-600">{availLabel(c.availability)}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${s.badge}`}>
@@ -260,8 +262,8 @@ function CandidateDrawer({ candidate, onClose, onStatusChange }: {
             <DrawerRow label="טלפון" value={candidate.phone ?? "—"} ltr />
           </DrawerSection>
           <DrawerSection title="פרטים אקדמיים">
-            <DrawerRow label="תחום תואר" value={candidate.degree_field} />
-            <DrawerRow label="מוסד לימודים" value={candidate.institution} />
+            <DrawerRow label="תחום תואר" value={candidate.degree_fields.name} />
+            <DrawerRow label="מוסד לימודים" value={candidate.institutions.name} />
           </DrawerSection>
           <DrawerSection title="זמינות וניסיון">
             <DrawerRow label="היקף משרה" value={candidate.availability === "full" ? "משרה מלאה" : "משרה חלקית"} />
