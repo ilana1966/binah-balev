@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
@@ -152,6 +153,17 @@ export default function LoginPage() {
                 {loading ? "מתחבר..." : "כניסה למערכת"}
               </button>
             </form>
+          )}
+
+          {!forgotMode && (
+            <div className="text-center mt-5">
+              <p className="text-sm text-gray-400">
+                עדיין אין לך חשבון?{" "}
+                <Link href="/signup" className="text-blue-600 hover:text-blue-800 transition font-medium">
+                  הירשמי
+                </Link>
+              </p>
+            </div>
           )}
         </div>
 
