@@ -20,8 +20,7 @@ export default function HomePage() {
           בינה בלב — מקום שבו AI פוגש קהילה
         </h1>
         <p className="text-blue-100 text-base leading-relaxed max-w-2xl mx-auto">
-          פלטפורמת הניהול הפנים-ארגונית של בינה בלב — מועדון הג'וניורים, רשת הסיניורים,
-          מסגרת פרויקטים, הדרכות וכו', במקום אחד
+          {"פלטפורמת הניהול הפנים-ארגונית של בינה בלב — מועדון הג'וניורים, רשת הסיניורים, מסגרת פרויקטים, הדרכות וכו', במקום אחד"}
         </p>
       </section>
 
@@ -73,7 +72,7 @@ export default function HomePage() {
             href="/join/junior"
             className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors shadow-md text-sm text-center"
           >
-            הגשת מועמדות כג'וניור/ית
+            {"הגשת מועמדות כג'וניור/ית"}
           </Link>
           <Link
             href="/join/senior"

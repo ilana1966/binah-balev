@@ -125,7 +125,7 @@ export default function JuniorPage() {
           </div>
           <h2 className="text-xl font-bold text-gray-800 mb-2">הצטרפות התקבלה!</h2>
           <p className="text-sm text-gray-500 mb-6">
-            תודה על ההצטרפות למועדון הג'וניורים של בינה בלב.<br />
+            {"תודה על ההצטרפות למועדון הג'וניורים של בינה בלב."}<br />
             ניצור איתך קשר בקרוב.
           </p>
           <Link href="/" className="text-sm text-blue-600 hover:text-blue-800 transition">
@@ -142,7 +142,7 @@ export default function JuniorPage() {
 
         <div className="flex flex-col items-center mb-8">
           <Image src="/logo.png" alt="בינה בלב" width={80} height={80} className="object-contain mb-3" priority />
-          <h1 className="text-2xl font-bold text-blue-800">הצטרפות למועדון הג'וניורים</h1>
+          <h1 className="text-2xl font-bold text-blue-800">{"הצטרפות למועדון הג'וניורים"}</h1>
           <p className="text-sm text-gray-400 mt-1">בינה בלב</p>
         </div>
 
